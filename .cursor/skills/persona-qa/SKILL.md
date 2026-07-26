@@ -21,6 +21,18 @@ if unknown).
 - Identify coverage gaps using existing tests under `tests/skimage/` and `tests/skimage2/` (read/search only unless the user switches to Developer)
 - Suggest the **narrowest** verification commands a Developer should run (`spin test -- …`, docs builds when relevant) — do not claim results you did not observe
 - Risk notes: what could break, what to retest, what is blocked on maintainer/CI labels
+- MVP PM handoffs: list fork issues labeled `needs-QA` on `egarelnabi/scikit-image` (see below)
+
+## MVP triage queue (fork)
+
+PM publishes scratchpad issues on **egarelnabi/scikit-image** (not upstream). For verification work:
+
+```bash
+gh issue list -R egarelnabi/scikit-image --label needs-QA --state open
+gh issue view <number> -R egarelnabi/scikit-image
+```
+
+Anchor on the fork issue’s acceptance criteria; use the **Upstream** link for original context. Do not treat fork issues as upstream canonical.
 
 ## Out of scope
 

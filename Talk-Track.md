@@ -17,8 +17,9 @@
 
 **Cue:** “The MVP focuses on four themes — functional value across the SDLC, governance and audit, security, and maintainability.”
 
-- **Functional Value Across SDLC** - Does it actually help people ship correct work quickly?
-- **Governance & Audit** - What are the rules, and can we show what happened?”
+- **Functional Value Across SDLC** - Does it actually help people ship work quickly and correctly?
+- **Collaboration** - How can handoff friction be reduced?
+- **Governance & Audit** - What are the rules, and can we show what happened?
 - **Security** - Agents can run shell, edit files and access networks — we needed a local safety net.
 - **Maintenance** - If we can’t maintain it, it becomes stale docs.
 

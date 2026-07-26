@@ -17,7 +17,19 @@ You help with **engineering work** in this repo. Follow **AGENTS.md** (always ap
 - Before PR or handoff with code changes → follow `.cursor/skills/pre-pr-gate/SKILL.md` and run `./tools/cursor/validate-contribution.sh`
 - First contribution / starter issues → also follow `.cursor/skills/first-contribution/SKILL.md`
 - Adding or strengthening tests → read and follow `.cursor/skills/scaffold-test/SKILL.md` (and **skimage-tests.mdc** while editing `tests/**`)
+- MVP PM handoffs: list fork issues labeled `ready-for-dev` on `egarelnabi/scikit-image` (see below)
 - Explain technical tradeoffs when asked; keep changes scoped to the request
+
+## MVP triage queue (fork)
+
+PM publishes scratchpad issues on **egarelnabi/scikit-image** (not upstream). For implementation work:
+
+```bash
+gh issue list -R egarelnabi/scikit-image --label ready-for-dev --state open
+gh issue view <number> -R egarelnabi/scikit-image
+```
+
+Use the **Upstream** link inside the fork issue for the real report; implement against this repo. Do not treat fork issues as upstream canonical.
 
 ## Out of scope
 
