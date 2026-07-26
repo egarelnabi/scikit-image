@@ -15,13 +15,13 @@
 
 ## 2. What I Focused On
 
-**Cue:** “The MVP focuses on four themes — functional value across the SDLC, governance and audit, security, and maintainability.”
+**Cue:** “The MVP focuses on five themes.”
 
-- **Functional Value Across SDLC** - Does it actually help people ship work quickly and correctly?
-- **Collaboration** - How can handoff friction be reduced between teams?
-- **Governance & Audit** - What are the rules, and can we show what happened?
-- **Security** - Agents can run shell, edit files and access networks — we needed a local safety net.
-- **Maintenance** - If we can’t maintain it, it becomes stale docs.
+- **Functional Value Across SDLC** - Does it help teams complete work faster without sacrificing quality?
+- **Collaboration** - Can it reduce handoff friction and improve shared understanding across roles and teams?
+- **Governance & Auditability** - Can we establish clear usage guidelines and demonstrate what actions were taken?
+- **Security** - Because agents can execute shell commands, modify files, and access networks, what local safeguards are required?
+- **Maintainability & Reusability** - Can the framework be maintained efficiently and adapted to other projects?
 
 ---
 
