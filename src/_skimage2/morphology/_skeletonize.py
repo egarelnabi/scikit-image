@@ -15,7 +15,7 @@ from ._skeletonize_various_cy import (
 )
 
 
-def skeletonize(image, *, method=None):
+def skeletonize(image, *, method=None, pad_mode='constant'):
     """Compute the skeleton of the input image via thinning.
 
     Parameters
@@ -30,6 +30,14 @@ def skeletonize(image, *, method=None):
         Which algorithm to use. Zhang's algorithm [Zha84]_ only works for
         2D images, and is the default for 2D. Lee's algorithm [Lee94]_
         works for 2D or 3D images and is the default for 3D.
+    pad_mode : str, optional
+        Padding mode passed to `numpy.pad` before Lee skeletonization. The
+        default ``'constant'`` pads with zeros. Other values (e.g. ``'edge'``)
+        can change behavior when objects touch the image border. Only used
+        when Lee's algorithm is applied (3D images, or 2D with
+        ``method='lee'``).
+
+        .. versionadded:: 0.27
 
     Returns
     -------
@@ -88,7 +96,7 @@ def skeletonize(image, *, method=None):
     elif image.ndim == 3 and method == 'zhang':
         raise ValueError('skeletonize method "zhang" only works for 2D ' 'images.')
     elif image.ndim == 3 or (image.ndim == 2 and method == 'lee'):
-        skeleton = _skeletonize_lee(image)
+        skeleton = _skeletonize_lee(image, pad_mode=pad_mode)
     else:
         raise ValueError(
             f'skeletonize requires a 2D or 3D image as input, ' f'got {image.ndim}D.'
@@ -589,7 +597,7 @@ def _table_lookup(image, table):
     return image
 
 
-def _skeletonize_lee(image):
+def _skeletonize_lee(image, *, pad_mode='constant'):
     """Compute the skeleton of a binary image.
 
     Thinning is used to reduce each connected component in a binary image
@@ -600,6 +608,8 @@ def _skeletonize_lee(image):
     image : ndarray, 2D or 3D
         An image containing the objects to be skeletonized. Zeros or ``False``
         represent background, nonzero values or ``True`` are foreground.
+    pad_mode : str, optional
+        Padding mode passed to `numpy.pad`. Default is ``'constant'``.
 
     Returns
     -------
@@ -643,7 +653,7 @@ def _skeletonize_lee(image):
     # NB: careful here to not clobber the original *and* minimize copying
     if image.ndim == 2:
         image_o = image_o[np.newaxis, ...]
-    image_o = np.pad(image_o, pad_width=1, mode='constant')  # copies
+    image_o = np.pad(image_o, pad_width=1, mode=pad_mode)  # copies
 
     # do the computation
     image_o = _compute_thin_image(image_o)

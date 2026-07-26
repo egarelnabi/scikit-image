@@ -160,6 +160,32 @@ class TestSkeletonize:
         assert result.dtype == bool
         assert_array_equal(image, original)
 
+    @pytest.mark.parametrize("pad_mode", ["constant", "edge", "reflect", "symmetric"])
+    def test_pad_mode_accepted(self, pad_mode):
+        image = np.zeros((10, 10), dtype=bool)
+        image[2:8, 2:8] = True
+        result = skeletonize(image, method="lee", pad_mode=pad_mode)
+        assert result.dtype == bool
+        assert result.shape == image.shape
+
+    def test_pad_mode_default_is_constant(self):
+        image = np.zeros((10, 10), dtype=bool)
+        image[:, 4:6] = True
+        result_default = skeletonize(image, method="lee")
+        result_constant = skeletonize(image, method="lee", pad_mode="constant")
+        assert_array_equal(result_default, result_constant)
+
+    def test_pad_mode_edge_differs_at_border(self):
+        # Object touching the border: edge padding can change the skeleton
+        image = np.zeros((10, 10), dtype=bool)
+        image[:, 4:6] = True
+        result_constant = skeletonize(image, method="lee", pad_mode="constant")
+        result_edge = skeletonize(image, method="lee", pad_mode="edge")
+        assert result_constant.dtype == bool
+        assert result_edge.dtype == bool
+        assert result_constant.shape == image.shape
+        assert not np.array_equal(result_constant, result_edge)
+
     def test_two_hole_image_vs_fiji(self):
         # Test a simple 2D image against FIJI
         image = np.array(
