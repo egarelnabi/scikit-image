@@ -125,12 +125,14 @@ Do **not** commit, push, or open a PR unless the user explicitly asks.
 
 When summarizing for the user, include:
 
-- Issue link (`Fixes #N` or `Closes #N` when appropriate)
 - What changed (files + intent)
 - Commands run and results
-- Concise PR title; disclose generative tools per **AGENTS.md** § Pull requests / CONTRIBUTING AI policy
+- Concise PR title
+- Suggested PR body that follows [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) — short description, `Fixes #N` / `Closes #N` when appropriate, generative-tool disclosure per **AGENTS.md** § Pull requests / CONTRIBUTING AI policy, and the template's optional `release-note` block (see [pre-pr-gate](../pre-pr-gate/SKILL.md) § 5)
 - Reminder: CI fails on new PRs until a maintainer adds a category label (expected for newcomers)
 - Do not merge; core team handles review/merge
+
+When the user asks to open the PR, use that template body with `gh pr create` (HEREDOC). Do **not** invent `## Summary` / `## Test plan` (or similar) unless they explicitly ask.
 
 ## Getting unstuck
 

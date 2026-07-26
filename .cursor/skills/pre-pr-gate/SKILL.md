@@ -76,14 +76,23 @@ Use `--allow-no-tests` sparingly; note the reason in the PR handoff. There is no
 
 The script does not check these — confirm with the user:
 
+- [ ] PR title is concise and descriptive
+- [ ] PR body follows [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) (see § 5)
 - [ ] Generative tools disclosed in the PR description ([AI policy](../../../CONTRIBUTING.md))
 - [ ] `Fixes #N` / `Closes #N` when appropriate
-- [ ] Optional `release-note` block for non-trivial user-facing changes ([PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md))
+- [ ] Optional `release-note` block filled for non-trivial user-facing changes (keep `...` or a one-liner for trivial docs)
 - [ ] Reminder: new PRs need a **category label** from a maintainer or CI may fail
 
-### 5. Handoff
+### 5. Handoff and PR body
 
-Summarize: files changed, intent, validate-contribution result, and suggested PR title/body bullets.
+Summarize: files changed, intent, and validate-contribution result.
+
+When drafting or creating a PR (`gh pr create` or equivalent):
+
+1. Read [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) and use that structure for the body.
+2. Body must include: a short description (what/why); `Fixes #N` / `Closes #N` when appropriate; generative-tool disclosure per **AGENTS.md** / CONTRIBUTING AI policy; and the template's `### Release note (optional)` heading plus a fenced `release-note` code block.
+3. Do **not** invent alternate section layouts (e.g. `## Summary` / `## Test plan`) unless the user explicitly asks for that style.
+4. Prefer a HEREDOC body that matches the template. Do not pass a `--body` that replaces the project template with unrelated headings.
 
 Do not commit, push, merge, or create a PR unless the user explicitly requests it.
 
