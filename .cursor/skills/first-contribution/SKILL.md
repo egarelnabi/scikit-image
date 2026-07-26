@@ -128,8 +128,7 @@ When summarizing for the user, include:
 - Issue link (`Fixes #N` or `Closes #N` when appropriate)
 - What changed (files + intent)
 - Commands run and results
-- Concise PR title; disclose generative tools per **AGENTS.md** § Pull requests / CONTRIBUTING AI policy
-- Reminder: CI fails on new PRs until a maintainer adds a category label (expected for newcomers)
+- **PR metadata:** complete [pre-pr-gate](../pre-pr-gate/SKILL.md) § PR metadata checklist (disclosure, release note, category label, title/body bullets)
 - Do not merge; core team handles review/merge
 
 ## Getting unstuck

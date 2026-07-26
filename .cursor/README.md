@@ -152,7 +152,7 @@ intent; hook scripts enforce it.
 
 1. Edit [protected_paths.py](hooks/protected_paths.py) or shell/MCP hooks as appropriate.
 2. Update the matching section in [security.mdc](rules/security.mdc). See **Enforcement vs guidance**.
-3. `.cursor/skills/**` is protected via `is_skill_path()` — no per-file globs needed.
+3. `.cursor/skills/**` is protected via `_is_skill_path()` in [protect-paths.py](hooks/protect-paths.py) — no per-file globs in `protected_paths.py`.
 4. Smoke-test: edit AGENTS.md without user ask → approval prompt; run validate-contribution.sh after script changes.
 5. Framework PRs that touch protected paths need **explicit user approval** in Cursor for agent edits.
 
