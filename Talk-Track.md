@@ -1,4 +1,4 @@
-# Talk Track — Cursor Onboarding Framework
+# Talk Track — Cursor Development Framework
 
 ---
 
