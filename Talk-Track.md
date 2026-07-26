@@ -164,3 +164,4 @@ First contribution requires **Developer** — we don’t let PM/QA drive a code 
 - Wire real CODEOWNERS + branch protection
 - Harder Admin-only protected edits (needs persona session state or deny-all for agents)
 - Host allow-lists, after-hook approval outcomes, sync-check for path lists
+- Create a transferable skill that can recreate a similar baseline framework in other projects
