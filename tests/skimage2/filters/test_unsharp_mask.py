@@ -2,6 +2,7 @@ import warnings
 
 import numpy as np
 import pytest
+from numpy.testing import assert_allclose
 
 from _skimage2._shared.utils import _supported_float_type
 from _skimage2.filters import unsharp_mask
@@ -174,3 +175,25 @@ def test_unsharp_masking_dtypes(shape, channel_axis, seed, preserve, dtype):
             assert np.any(output >= 0)
     assert output.dtype == _supported_float_type(dtype)
     assert output.shape == shape
+
+
+def test_unsharp_mask_channel_axis_negative():
+    """Negative channel_axis must match the equivalent positive axis.
+
+    Regression test for https://github.com/scikit-image/scikit-image/issues/7264
+    """
+    rng = np.random.RandomState(3141592653)
+    rgb = rng.random((32, 32, 3)).astype(np.float32)
+
+    result_neg = unsharp_mask(rgb, channel_axis=-1)
+    result_pos = unsharp_mask(rgb, channel_axis=2)
+
+    assert_allclose(result_neg, result_pos)
+    assert not np.all(result_neg == 0)
+
+    rgb_uint8 = (rgb * 255).astype(np.uint8)
+    result_uint8_neg = unsharp_mask(rgb_uint8, channel_axis=-1)
+    result_uint8_pos = unsharp_mask(rgb_uint8, channel_axis=2)
+
+    assert_allclose(result_uint8_neg, result_uint8_pos)
+    assert not np.all(result_uint8_neg == 0)
