@@ -18,6 +18,9 @@ developers directly); that way, everyone can benefit from the answers,
 and developers can answer according to their availability. Don't feel
 shy, the team is very friendly!
 
+New to the codebase? Start with the short [ONBOARDING.md](ONBOARDING.md)
+baseline, then use this document for policy and workflow detail.
+
 ```{contents}
 :local: true
 ```

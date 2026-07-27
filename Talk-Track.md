@@ -161,6 +161,6 @@ First contribution requires **Developer** — we don’t let PM/QA drive a code 
 
 **Cue:** “MVP is in place; a few ops and optional hardenings remain.”
 
-- Host allow-lists, after-hook approval outcomes, sync-check for path lists
-- Create a transferable skill that can recreate a similar baseline framework in other projects
+- Create a reusable package that can recreate a similar framework in other projects
 - Add guided onboarding capability to make sure new developers have the necessary base understanding of the project
+- Tighten security (hard deny protected changes, network allow lists, configure CODE_OWNERS with GH rules, etc...)

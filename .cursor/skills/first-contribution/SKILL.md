@@ -27,6 +27,27 @@ If the user names an issue **without** that label (or with different labels):
 
 Do not expand scope beyond the chosen issue. No drive-by refactors, renames, or unrelated cleanups.
 
+## When to use Plan mode
+
+**Default: stay in Agent** and follow this playbook. Most `:beginner: Good first issue` work is already scoped — Plan adds friction without benefit.
+
+**Switch to Plan** (Cursor Plan mode) only when, after `gh issue view`, the next step is still ambiguous, for example:
+
+- User confirmed an **off-label** or larger issue
+- Issue text is vague (no files / acceptance criteria)
+- Several valid approaches (API shape, where tests live)
+- Change would span many modules (e.g. Cython + wrappers + both test trees)
+
+Do **not** require Plan as a step of every first contribution. After a short plan is agreed, switch back to Agent to implement.
+
+## Agent Review (optional)
+
+**Offer** Cursor **Agent Review** of the diff when the change is ready to hand off — after tests / verify (pre-pr-gate), or when the user is about to open a PR. Useful for missing tests, wrong layer (`skimage` vs `_skimage2`), and scope creep.
+
+**Skip** for docs-only or still in-progress work, pure issue listing with no code, or while still in Plan.
+
+Agent Review does **not** replace **pre-pr-gate** (`validate-contribution.sh` / `spin`), QA test plans, or maintainer review. Do not auto-launch Bugbot or security-review unless the user explicitly asks.
+
 ## Workflow
 
 Copy and track:
@@ -35,11 +56,13 @@ Copy and track:
 First contribution:
 - [ ] List / pick an issue (prefer :beginner: Good first issue)
 - [ ] If off-label: strongly suggest labeled alternatives; get explicit confirmation
+- [ ] If scope/approach still unclear: Plan mode, then return to Agent
 - [ ] Dev setup (if needed) — AGENTS.md § Build and test
 - [ ] Branch from up-to-date main
 - [ ] Implement only what the issue asks
 - [ ] Add or update tests — read and follow [scaffold-test](../scaffold-test/SKILL.md)
 - [ ] Verify — [pre-pr-gate skill](../pre-pr-gate/SKILL.md) / `./tools/cursor/validate-contribution.sh`
+- [ ] Offer Agent Review (optional; skip docs-only / WIP)
 - [ ] Summarize for PR (link issue, AI disclosure)
 ```
 
@@ -118,6 +141,8 @@ Follow **[pre-pr-gate](../pre-pr-gate/SKILL.md)**:
 3. Complete the PR metadata checklist in the pre-pr-gate skill before handoff.
 
 Do not claim checks passed unless the script (or equivalent steps) succeeded. Report commands and outcomes.
+
+After a successful verify (or when the user is about to open a PR), **offer Agent Review** per the section above — do not require it.
 
 ### 5. Hand off for PR
 

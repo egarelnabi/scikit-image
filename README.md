@@ -11,6 +11,7 @@
 - **User forum:** [https://forum.image.sc/tag/scikit-image](https://forum.image.sc/tag/scikit-image)
 - **Developer forum:** [https://discuss.scientific-python.org/c/contributor/skimage](https://discuss.scientific-python.org/c/contributor/skimage)
 - **Source:** [https://github.com/scikit-image/scikit-image](https://github.com/scikit-image/scikit-image)
+- **New developers:** [ONBOARDING.md](ONBOARDING.md) (short baseline; full guide [CONTRIBUTING.md](CONTRIBUTING.md))
 
 ## Installation
 
