@@ -1,4 +1,4 @@
-# Talk Track — Cursor Development Framework
+# Talk Points — Cursor Development Framework
 
 ---
 
@@ -13,7 +13,7 @@
 
 ---
 
-## 2. Focused Areas
+## 2. Focus Areas
 
 **Cue:** “The MVP focuses on removing friction slowing onboarding andoption”
 
