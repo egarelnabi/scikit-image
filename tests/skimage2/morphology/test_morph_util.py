@@ -3,8 +3,73 @@
 import numpy as np
 import pytest
 from numpy.testing import assert_array_equal
+from scipy import ndimage as ndi
 
+from _skimage2._shared import testing
 from _skimage2.morphology import _util
+
+
+@pytest.mark.parametrize("connectivity", [None, 1, 2])
+@pytest.mark.parametrize("ndim", [1, 2, 3])
+def test_validate_connectivity_matches_resolve_neighborhood(connectivity, ndim):
+    """Scalar/None connectivity shares footprint logic with `_resolve_neighborhood`."""
+    conn = 1 if connectivity is None else connectivity
+    if conn > ndim:
+        pytest.skip("connectivity cannot exceed ndim")
+
+    footprint, offset = _util._validate_connectivity(ndim, connectivity, None)
+    expected = _util._resolve_neighborhood(None, conn, ndim)
+
+    testing.assert_equal(footprint, expected)
+    testing.assert_equal(offset, np.array(expected.shape) // 2)
+
+
+def test_validate_connectivity_array_and_explicit_offset():
+    footprint = np.ones((2, 2), dtype=bool)
+    offset = np.array([0, 1])
+    result, result_offset = _util._validate_connectivity(2, footprint, offset)
+
+    testing.assert_equal(result, footprint)
+    testing.assert_equal(result_offset, offset)
+
+
+def test_validate_connectivity_even_shape_requires_offset():
+    footprint = np.ones((2, 2), dtype=bool)
+    with testing.raises(ValueError, match="unambiguous"):
+        _util._validate_connectivity(2, footprint, None)
+
+
+def test_validate_connectivity_wrong_ndim():
+    footprint = np.ones((3, 3), dtype=bool)
+    with testing.raises(ValueError, match="dimensions"):
+        _util._validate_connectivity(3, footprint, None)
+
+
+@pytest.mark.parametrize(
+    "footprint,connectivity,ndim",
+    [
+        (None, 1, 2),
+        (None, None, 3),
+        (np.ones((3, 3), dtype=bool), None, 2),
+    ],
+)
+def test_resolve_neighborhood_basic(footprint, connectivity, ndim):
+    result = _util._resolve_neighborhood(footprint, connectivity, ndim)
+    if footprint is None:
+        conn = ndim if connectivity is None else connectivity
+        expected = ndi.generate_binary_structure(ndim, conn)
+    else:
+        expected = footprint
+    testing.assert_equal(result, expected)
+
+
+def test_resolve_neighborhood_enforce_adjacency():
+    footprint = np.ones((5, 5), dtype=bool)
+    with testing.raises(ValueError, match="dimension size"):
+        _util._resolve_neighborhood(footprint, None, 2, enforce_adjacency=True)
+
+    result = _util._resolve_neighborhood(footprint, None, 2, enforce_adjacency=False)
+    testing.assert_equal(result, footprint)
 
 
 @pytest.mark.parametrize("image_shape", [(111,), (33, 44), (22, 55, 11), (6, 5, 4, 3)])

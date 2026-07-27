@@ -7,6 +7,10 @@ from scipy import ndimage as ndi
 def _validate_connectivity(image_dim, connectivity, offset):
     """Convert any valid connectivity to a footprint and offset.
 
+    Footprint construction and validation are delegated to
+    `_resolve_neighborhood`. This helper additionally resolves the footprint
+    center (`offset`).
+
     Parameters
     ----------
     image_dim : int
@@ -38,14 +42,20 @@ def _validate_connectivity(image_dim, connectivity, offset):
         connectivity = 1
 
     if np.isscalar(connectivity):
-        c_connectivity = ndi.generate_binary_structure(image_dim, connectivity)
+        c_connectivity = _resolve_neighborhood(None, connectivity, image_dim)
     else:
-        c_connectivity = np.array(connectivity, bool)
-        if c_connectivity.ndim != image_dim:
-            raise ValueError("Connectivity dimension must be same as image")
+        # Array connectivity may be larger than 3x3... and may be even-sized
+        # when an explicit offset is provided, so skip adjacency/odd checks here.
+        c_connectivity = _resolve_neighborhood(
+            connectivity,
+            None,
+            image_dim,
+            enforce_adjacency=False,
+            require_odd=False,
+        )
 
     if offset is None:
-        if any([x % 2 == 0 for x in c_connectivity.shape]):
+        if any(x % 2 == 0 for x in c_connectivity.shape):
             raise ValueError("Connectivity array must have an unambiguous " "center")
 
         offset = np.array(c_connectivity.shape) // 2
@@ -206,7 +216,14 @@ def _offsets_to_raveled_neighbors(image_shape, footprint, center, order='C'):
     return raveled_offsets
 
 
-def _resolve_neighborhood(footprint, connectivity, ndim, enforce_adjacency=True):
+def _resolve_neighborhood(
+    footprint,
+    connectivity,
+    ndim,
+    enforce_adjacency=True,
+    *,
+    require_odd=True,
+):
     """Validate or create a footprint (structuring element).
 
     Depending on the values of `connectivity` and `footprint` this function
@@ -223,14 +240,18 @@ def _resolve_neighborhood(footprint, connectivity, ndim, enforce_adjacency=True)
         pixels are considered as part of the neighborhood.
     connectivity : int
         A number used to determine the neighborhood of each evaluated pixel.
-        Adjacent pixels whose squared distance from the center is less than or
-        equal to `connectivity` are considered neighbors. Ignored if
+        Interpreted as in ``scipy.ndimage.generate_binary_structure`` (maximum
+        number of orthogonal steps to reach a neighbor). Ignored if
         `footprint` is not None.
     ndim : int
         Number of dimensions `footprint` ought to have.
     enforce_adjacency : bool
         A boolean that determines whether footprint must only specify direct
-        neighbors.
+        neighbors (each dimension size must be 3).
+    require_odd : bool
+        If True (default), custom footprints must have odd size along every
+        dimension. Set to False when the caller handles centering separately
+        (see `_validate_connectivity`).
 
     Returns
     -------
@@ -261,7 +282,7 @@ def _resolve_neighborhood(footprint, connectivity, ndim, enforce_adjacency=True)
         # Must only specify direct neighbors
         if enforce_adjacency and any(s != 3 for s in footprint.shape):
             raise ValueError("dimension size in footprint is not 3")
-        elif any((s % 2 != 1) for s in footprint.shape):
+        elif require_odd and any((s % 2 != 1) for s in footprint.shape):
             raise ValueError("footprint size must be odd along all dimensions")
 
     return footprint
