@@ -164,3 +164,4 @@ First contribution requires **Developer** — we don’t let PM/QA drive a code 
 - Create a reusable package that can recreate a similar framework in other projects
 - Add guided onboarding capability to make sure new developers have the necessary base understanding of the project
 - Tighten security (hard deny protected changes, network allow lists, configure CODE_OWNERS with GH rules, etc...)
+- Add additional personas like SecOps for policies and Admin for framework changes, etc...
