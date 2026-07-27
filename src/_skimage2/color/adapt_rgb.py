@@ -55,7 +55,15 @@ def hsv_value(image_filter, image, *args, **kwargs):
     image_filter : function
         Function that filters a gray-scale image.
     image : array
-        Input image. Note that RGBA images are treated as RGB.
+        RGB or RGBA image. RGBA images are treated as RGB (the alpha channel
+        is ignored).
+    *args, **kwargs : arguments and keyword arguments
+        Passed to `image_filter`.
+
+    Returns
+    -------
+    out : ndarray
+        RGB image after applying `image_filter` to the HSV value channel.
     """
     # Slice the first three channels so that we remove any alpha channels.
     hsv = color.rgb2hsv(image[:, :, :3])
