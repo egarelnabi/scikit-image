@@ -11,6 +11,8 @@ description: >-
 
 Run **local checks that mirror PR CI** before handoff. Do not open or push a PR unless the user explicitly asks.
 
+PRs target **`egarelnabi/scikit-image`** only — never `scikit-image/scikit-image` (see **AGENTS.md** § Contribution target).
+
 **Script (canonical commands):** [tools/cursor/validate-contribution.sh](../../../tools/cursor/validate-contribution.sh)
 
 Norms: **AGENTS.md** § Verification and § Pull requests. Test quality: [scaffold-test](../scaffold-test/SKILL.md).
@@ -76,12 +78,12 @@ Use `--allow-no-tests` sparingly; note the reason in the PR handoff. There is no
 
 The script does not check these — confirm with the user:
 
+- [ ] PR target is **`egarelnabi/scikit-image`** (base `main`) — never `scikit-image/scikit-image`
 - [ ] PR title is concise and descriptive
 - [ ] PR body follows [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) (see § 5)
 - [ ] Generative tools disclosed in the PR description ([AI policy](../../../CONTRIBUTING.md))
-- [ ] `Fixes #N` / `Closes #N` when appropriate
+- [ ] `Fixes #N` / `Closes #N` only for issues on **`egarelnabi/scikit-image`**; link upstream issue URLs as references when work came from upstream discovery
 - [ ] Optional `release-note` block filled for non-trivial user-facing changes (keep `...` or a one-liner for trivial docs)
-- [ ] Reminder: new PRs need a **category label** from a maintainer or CI may fail
 
 ### 5. Handoff and PR body
 
@@ -89,10 +91,11 @@ Summarize: files changed, intent, and validate-contribution result.
 
 When drafting or creating a PR (`gh pr create` or equivalent):
 
-1. Read [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) and use that structure for the body.
-2. Body must include: a short description (what/why); `Fixes #N` / `Closes #N` when appropriate; generative-tool disclosure per **AGENTS.md** / CONTRIBUTING AI policy; and the template's `### Release note (optional)` heading plus a fenced `release-note` code block.
-3. Do **not** invent alternate section layouts (e.g. `## Summary` / `## Test plan`) unless the user explicitly asks for that style.
-4. Prefer a HEREDOC body that matches the template. Do not pass a `--body` that replaces the project template with unrelated headings.
+1. Open the PR against **`-R egarelnabi/scikit-image --base main`**. Never target `scikit-image/scikit-image`.
+2. Read [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) and use that structure for the body.
+3. Body must include: a short description (what/why); `Fixes #N` / `Closes #N` when closing a **fork** issue; an upstream issue URL when the work was discovered there; generative-tool disclosure per **AGENTS.md** / CONTRIBUTING AI policy; and the template's `### Release note (optional)` heading plus a fenced `release-note` code block.
+4. Do **not** invent alternate section layouts (e.g. `## Summary` / `## Test plan`) unless the user explicitly asks for that style.
+5. Prefer a HEREDOC body that matches the template. Do not pass a `--body` that replaces the project template with unrelated headings.
 
 Do not commit, push, merge, or create a PR unless the user explicitly requests it.
 
@@ -101,4 +104,5 @@ Do not commit, push, merge, or create a PR unless the user explicitly requests i
 - Full suite (`spin test` without `--test-modified`) unless the user asks or changes affect test infrastructure
 - `--skip-pre-commit` except when the user explicitly needs a debug iteration (note it in the handoff)
 - `--allow-no-tests` unless the user confirms the src/ change does not need tests (note it in the handoff)
+- Pushing or opening PRs against `scikit-image/scikit-image`
 - Editing protected paths (see `.cursor/rules/security.mdc`)

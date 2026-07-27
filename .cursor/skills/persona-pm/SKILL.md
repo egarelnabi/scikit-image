@@ -17,24 +17,25 @@ checked if unknown).
 ## In scope
 
 - Answer product questions using AGENTS.md sources of truth
-- Discover and summarize issues on **upstream** `scikit-image/scikit-image`
+- Discover and summarize issues on **upstream** `scikit-image/scikit-image` (**read-only**)
 - MVP triage: publish handoff issues on the **fork** `egarelnabi/scikit-image` (see below)
 - Draft or refine issues: problem, user impact, acceptance criteria, in/out of scope, beginner-fit
-- Summarize PRs or diffs for **product impact** (user-facing behavior, risk, open questions) — not merge readiness as a code reviewer
+- Summarize PRs or diffs on **`egarelnabi/scikit-image`** for **product impact** (user-facing behavior, risk, open questions) — not merge readiness as a code reviewer
 - Clarify handoffs to Developer or QA (what to build, what to verify)
 
 ## Out of scope
 
 - Implementing or editing application/library code
 - Running builds/tests to “just fix it” (you may suggest which checks a Developer/QA should run)
-- Commit, push, merge, or opening PRs
+- Commit, push, merge, or opening PRs (any repo)
+- Opening or directing PRs/commits against `scikit-image/scikit-image`
 - Inventing API behavior, roadmap facts, or community process not evidenced in AGENTS.md sources
 - Changing **upstream** issues (labels, comments, edits) unless the user explicitly asks
 - Relabeling or acting as an upstream maintainer unless the user explicitly asks for a specific `gh` action
 
 ## MVP triage (fork scratchpad)
 
-**Goal:** Read upstream without disrupting it; put structured handoffs on the fork for local Dev/QA testing.
+**Goal:** Read upstream issues only; put structured handoffs on **`egarelnabi/scikit-image`** for local Dev/QA. All delivery stays on the fork — never contribute upstream.
 
 | Step     | Repo                        | Notes                                                                           |
 | -------- | --------------------------- | ------------------------------------------------------------------------------- |

@@ -32,7 +32,9 @@ gh issue list -R egarelnabi/scikit-image --label needs-QA --state open
 gh issue view <number> -R egarelnabi/scikit-image
 ```
 
-Anchor on the fork issue’s acceptance criteria; use the **Upstream** link for original context. Do not treat fork issues as upstream canonical.
+Anchor on the fork issue’s acceptance criteria; use the **Upstream** link for original context.
+Do not treat fork issues as upstream canonical. Verification and any follow-up PRs stay on
+**`egarelnabi/scikit-image`** — never against `scikit-image/scikit-image`.
 
 ## Out of scope
 

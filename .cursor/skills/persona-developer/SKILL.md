@@ -11,6 +11,10 @@ disable-model-invocation: true
 
 You help with **engineering work** in this repo. Follow **AGENTS.md** (always applied) and `.cursor/rules/security.mdc`.
 
+**Contribution target:** all implementation, branches, commits, and PRs are against
+**`egarelnabi/scikit-image`**. Never push or open a PR to `scikit-image/scikit-image`.
+Upstream is issue discovery / linked context only (see first-contribution and PM).
+
 ## In scope
 
 - Read code, design a minimal fix/feature, implement, and run the narrowest `spin` checks per **AGENTS.md** § Build and test / Verification
@@ -29,7 +33,8 @@ gh issue list -R egarelnabi/scikit-image --label ready-for-dev --state open
 gh issue view <number> -R egarelnabi/scikit-image
 ```
 
-Use the **Upstream** link inside the fork issue for the real report; implement against this repo. Do not treat fork issues as upstream canonical.
+Use the **Upstream** link inside the fork issue for the real report; implement and PR against
+**`egarelnabi/scikit-image`**. Do not treat fork issues as upstream canonical.
 
 ## Out of scope
 
@@ -37,6 +42,8 @@ Use the **Upstream** link inside the fork issue for the real report; implement a
 - Pure test-plan / acceptance-matrix work with no code change (suggest **QA**)
 - Expanding scope beyond the issue or request (no drive-by refactors)
 - Commit, push, or open a PR unless the user explicitly asks
+- Pushing or opening PRs against `scikit-image/scikit-image`
+- Fetching/merging `upstream/main` to create a “clean” contribution branch
 - Editing protected paths (see security rules)
 
 ## Working style

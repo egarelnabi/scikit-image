@@ -62,6 +62,9 @@ These rules are **not** in [protected_paths.py](hooks/protected_paths.py); agent
 | [skills/persona-pm/SKILL.md](skills/persona-pm/SKILL.md)                 | Issues, acceptance criteria, no code; MVP triage → fork labels              |
 | [skills/persona-qa/SKILL.md](skills/persona-qa/SKILL.md)                 | Test plans, verification checklists                                         |
 
+**Contribution target:** all git work and PRs go to `egarelnabi/scikit-image`. Never contribute
+to `scikit-image/scikit-image` (issue discovery only).
+
 **MVP triage (fork scratchpad):** PM discovers on `scikit-image/scikit-image`, publishes handoffs on
 `egarelnabi/scikit-image` with fork-only labels `ready-for-dev` (Developer) or `needs-QA` (QA).
 Does not modify upstream issues unless the user explicitly asks.

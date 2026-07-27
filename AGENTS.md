@@ -28,6 +28,12 @@ Before changing a module, read:
 - Do not add dependencies without explicit approval
 - Match surrounding naming, imports, and docstring style
 
+## Contribution target
+
+All branches, commits, and PRs target **`egarelnabi/scikit-image`**. Never push or open a
+PR against `scikit-image/scikit-image`. That upstream repo is **issue discovery only**
+(first-contribution / PM triage); implement and review on this fork.
+
 ## Security
 
 Follow `.cursor/rules/security.mdc` for git, shell, secrets, and protected-path rules.
@@ -74,11 +80,11 @@ Before finishing a task:
 
 ## Pull requests
 
+- Open PRs only against **`egarelnabi/scikit-image`** (see § Contribution target).
 - Disclose all generative tools used; authors must understand every line changed. See [AI policy](CONTRIBUTING.md#ai-policy).
-- CI needs a **category label** on new PRs or checks fail until a maintainer adds one.
 - Optional `release-note` block in the PR description for non-trivial changes (see [PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)).
 - API deprecations: follow [deprecation cycle](CONTRIBUTING.md#deprecation-cycle) and add an entry to `TODO.txt`.
-- Do not merge PRs; two core approvals required for code changes.
+- Do not merge PRs unless the user explicitly asks.
 
 ## Further reading
 
