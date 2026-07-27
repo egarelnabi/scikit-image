@@ -165,3 +165,49 @@ First contribution requires **Developer** — we don’t let PM/QA drive a code 
 - Add guided onboarding capability to make sure new developers have the necessary base understanding of the project
 - Tighten security (hard deny protected changes, network allow lists, configure CODE_OWNERS with GH rules, etc...)
 - Add additional personas like SecOps for policies and Admin for framework changes, etc...
+
+---
+
+## Demo runbook (~8–12 min)
+
+Audience cares about **business value**: SDLC friction, security/governance, onboarding speed — not architecture deep-dives. Narrate outcomes at each step.
+
+### Prep
+
+- Branch with the framework loaded; Cursor hooks enabled
+- Prefer **fresh chats** so persona ask is visible
+- Optional: side pane ready for `.cursor/audit/audit.jsonl`
+- Don’t implement a full feature live — show routing, guardrails, and the local gate
+
+### Sequence
+
+| Step                           | Do                                                                                                                    | Say / highlight                                                                                                                                                                    |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **0. Frame** (60–90s)          | No click — set context                                                                                                | AI helps velocity _and_ creates risk (wrong files, skipped checks, destructive shell). This is a **thin in-repo control plane** so AI follows how we already ship.                 |
+| **1. Personas** (1–2 min)      | New chat → agent asks Dev / PM / QA                                                                                   | Same IDE, role-appropriate work. Cuts handoff friction; explicit mode = light governance. Optional: choose **PM**, ask for acceptance criteria — show it doesn’t jump into `src/`. |
+| **2. Onboarding** (2–3 min)    | As **Developer**: “Help me with my first PR”                                                                          | Playbook, not blank chat. Prefers `:beginner: Good first issue`. Guides setup → scoped change → verify → PR. **Value:** faster time-to-first-PR, less senior babysitting.          |
+| **3. SDLC friction** (1–2 min) | One prompt only: “Where should a new algorithm live?” _or_ “Add tests for …”                                          | Right layer (`_skimage2` vs `skimage`), right test tree, `spin` not raw pytest. **Value:** less rework in review/CI.                                                               |
+| **4. Security** (2–3 min)      | (a) Agent edits `AGENTS.md` / a skill without you asking → **ask** card. (b) Destructive or `--no-verify` → **deny**. | In-session guardrails. Deny vs ask. Layered with pre-commit + CODEOWNERS. Soft Admin still needs human approve. **Value:** AI coding without a blank check.                        |
+| **5. Audit** (45–60s)          | Open audit log after deny/ask                                                                                         | High-signal trail only (deny/ask), not every allow. **Value:** reviewable AI-assisted activity.                                                                                    |
+| **6. Pre-PR gate** (1–2 min)   | “Validate my branch” / “ready to open a PR”                                                                           | Runs `validate-contribution.sh` (heuristics + pre-commit + `spin test --test-modified`). **Value:** checks left; cleaner PRs before human review.                                  |
+| **7. Close** (30–45s)          | Roll up the table below                                                                                               | MVP is repo-owned; next is reuse across projects (§10), not a new platform.                                                                                                        |
+
+### Value roll-up (close)
+
+| They care about | What you showed                                |
+| --------------- | ---------------------------------------------- |
+| Onboarding      | First-PR skill + persona + repo routing        |
+| SDLC friction   | Right layer, tests, pre-PR validate            |
+| Security        | Deny/ask hooks, protected paths                |
+| Governance      | Personas, protected framework files, audit log |
+| Maintainability | Thin layers over CONTRIBUTING                  |
+
+### Short room (~6 min)
+
+**Must-show:** persona ask → first-PR prompt → protected-path **ask** → peek audit → one-liner on validate script. Skip architecture unless asked.
+
+### Don’t demo live
+
+- Full feature implementation or long test runs
+- Deep dive into hook Python / every `.mdc`
+- Hard Admin-only enforcement (not shipped — soft ask by design)
