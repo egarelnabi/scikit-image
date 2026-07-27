@@ -13,9 +13,9 @@
 
 ---
 
-## 2. What I Focused On
+## 2. Focused Areas
 
-**Cue:** “The MVP focuses on five themes.”
+**Cue:** “The MVP focuses on removing friction slowing onboarding andoption”
 
 - **Functional Value Across SDLC** - Does it help teams complete work faster without sacrificing quality?
 - **Collaboration** - Can it reduce handoff friction and improve shared understanding across roles and teams?
