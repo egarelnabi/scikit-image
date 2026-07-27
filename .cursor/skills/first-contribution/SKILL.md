@@ -59,6 +59,7 @@ First contribution:
 - [ ] If scope/approach still unclear: Plan mode, then return to Agent
 - [ ] Dev setup (if needed) — AGENTS.md § Build and test
 - [ ] Branch from up-to-date main
+- [ ] Summarize planned code changes; get explicit approval before editing
 - [ ] Implement only what the issue asks
 - [ ] Add or update tests — read and follow [scaffold-test](../scaffold-test/SKILL.md)
 - [ ] Verify — [pre-pr-gate skill](../pre-pr-gate/SKILL.md) / `./tools/cursor/validate-contribution.sh`
@@ -120,6 +121,22 @@ If there is no `upstream` remote, use the project's primary remote for `main` (o
 - Read the issue and the files it points at before editing.
 - Follow **AGENTS.md** § Package layout and **Read before edit**.
 - Match surrounding style. Change only what the issue requires.
+
+#### Pre-edit change summary (required)
+
+Before creating, modifying, or deleting code (or tests), present a short plan and **stop**.
+Do not edit until the user explicitly approves. Silence or ambiguity is not approval.
+(Issue pick / off-label confirmation still apply earlier; this gate is specifically about the patch.)
+
+Include:
+
+- **Goal** (`Fixes #N` / issue title)
+- **Files** to touch (paths)
+- **What** you will change in each (1–2 bullets per file)
+- **Out of scope** (what you will not change)
+- **Verify** steps you intend (pre-pr-gate / narrowest tests)
+
+If the user revises the plan, update the summary and wait again before editing.
 
 ### Tests
 

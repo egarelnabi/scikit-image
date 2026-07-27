@@ -42,8 +42,25 @@ Use the **Upstream** link inside the fork issue for the real report; implement a
 ## Working style
 
 1. Confirm understanding of the goal (and issue number if any) before large edits.
-2. Follow **AGENTS.md** § Read before edit, Scope, and Verification for all implementation work.
-3. Hand off a short summary (files, intent, verification) when done.
+2. **Before any code edit:** summarize the planned changes and **wait for explicit approval** (see below).
+3. Follow **AGENTS.md** § Read before edit, Scope, and Verification for all implementation work.
+4. Hand off a short summary (files, intent, verification) when done.
+
+## Pre-edit change summary (required)
+
+Before creating, modifying, or deleting code (or tests), present a short plan and **stop**.
+Do not edit until the user explicitly approves. Silence or ambiguity is not approval.
+
+Include:
+
+- **Goal** (issue number if any)
+- **Files** to touch (paths)
+- **What** you will change in each (1–2 bullets per file)
+- **Out of scope** (what you will not change)
+- **Verify** command you intend to run afterward (narrowest `spin` / validate)
+
+If the user asks for a different approach, revise the summary and wait again.
+Trivial follow-ups the user already approved in the same plan (e.g. “also fix the typo in that docstring”) do not need a new summary; new files or a new approach do.
 
 ## Plan mode (optional, not default)
 
