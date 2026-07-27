@@ -161,10 +161,6 @@ First contribution requires **Developer** — we don’t let PM/QA drive a code 
 
 **Cue:** “MVP is in place; a few ops and optional hardenings remain.”
 
-- Wire real CODEOWNERS + branch protection
-- Harder Admin-only protected edits (needs persona session state or deny-all for agents)
 - Host allow-lists, after-hook approval outcomes, sync-check for path lists
-  <<<<<<< HEAD
-- # Create a transferable skill that can recreate a similar baseline framework in other projects
-- Create a package that serves as a baseline for reproducing the same framework experience in other projects
-  > > > > > > > 5307e31340f8a4eda00e81f594e21461290c9206
+- Create a transferable skill that can recreate a similar baseline framework in other projects
+- Add guided onboarding capability to make sure new developers have the necessary base understanding of the project
